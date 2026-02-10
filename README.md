@@ -8,70 +8,124 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); }
-        .option-btn { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-        .custom-glass { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); }
-        .report-card { transition: all 0.3s ease; }
+        
+        .gradient-bg { 
+            background: radial-gradient(circle at top right, #1e40af, #0f172a); 
+        }
+        
+        .custom-glass { 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .option-btn { 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .option-btn:not(.selected):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .correct-anim {
+            background-color: #dcfce7 !important;
+            border-color: #22c55e !important;
+            animation: pulse-green 0.5s;
+        }
+
+        .wrong-anim {
+            background-color: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            animation: shake 0.4s;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .progress-glow {
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+        }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen flex flex-col text-slate-900">
+<body class="bg-[#f8fafc] min-h-screen flex flex-col text-slate-900">
 
     <!-- Header -->
-    <header class="gradient-bg text-white py-12 shadow-2xl relative overflow-hidden">
+    <header class="gradient-bg text-white py-16 shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white"></path>
+            </svg>
+        </div>
         <div class="container mx-auto px-4 text-center relative z-10">
-            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">HayotInsurance.uz</h1>
-            <p class="text-blue-100 text-lg md:text-xl max-w-2xl mx-auto font-medium opacity-90">
-                Sug'urta bozori mutaxassislari uchun professional malaka imtihoniga tayyorlov platformasi
+            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter mb-4 animate-fade-in">
+                Hayot<span class="text-blue-400">Insurance</span>.uz
+            </h1>
+            <p class="text-blue-100 text-lg md:text-xl max-w-2xl mx-auto font-medium opacity-80">
+                O'zbekiston sug'urta bozori mutaxassislari uchun interaktiv imtihon platformasi
             </p>
         </div>
     </header>
 
-    <main class="flex-grow container mx-auto px-4 py-12 max-w-4xl -mt-10">
+    <main class="flex-grow container mx-auto px-4 py-12 max-w-4xl -mt-16">
         
         <!-- Start Screen -->
-        <div id="start-screen" class="custom-glass rounded-[2.5rem] shadow-2xl p-8 md:p-12 text-center border border-white relative z-20">
+        <div id="start-screen" class="custom-glass rounded-[3rem] shadow-[0_32px_64px_-15px_rgba(0,0,0,0.1)] p-10 md:p-16 text-center relative z-20">
             <div class="max-w-md mx-auto">
-                <div class="w-20 h-20 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl transform -rotate-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04m18.236 0a11.955 11.955 0 01-8.618 3.04m0 0V9m0 0a9 9 0 010 18v-2.118" />
+                <div class="w-24 h-24 bg-blue-600 text-white rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-2xl transform hover:rotate-6 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                 </div>
-                <h2 class="text-3xl font-bold text-slate-800 mb-6 tracking-tight">Bilim darajangizni sinab ko'ring</h2>
+                <h2 class="text-4xl font-extrabold text-slate-800 mb-6 tracking-tight">Imtihonga tayyormisiz?</h2>
                 
-                <div class="space-y-4 text-left mb-10 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                    <div class="flex items-start">
-                        <span class="text-blue-600 mr-3 mt-1 font-bold">✓</span>
-                        <p class="text-slate-600 text-sm">Savollar yangi tahrirdagi O'RQ-730 Qonuni asosida.</p>
+                <div class="grid grid-cols-1 gap-4 mb-10">
+                    <div class="flex items-center p-4 bg-blue-50 rounded-2xl border border-blue-100">
+                        <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white mr-4 shrink-0">1</div>
+                        <p class="text-slate-700 text-sm font-semibold text-left">10 ta dolzarb professional savol</p>
                     </div>
-                    <div class="flex items-start">
-                        <span class="text-blue-600 mr-3 mt-1 font-bold">✓</span>
-                        <p class="text-slate-600 text-sm">Xatolar ustida ishlash uchun batafsil hisobot.</p>
+                    <div class="flex items-center p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
+                        <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white mr-4 shrink-0">2</div>
+                        <p class="text-slate-700 text-sm font-semibold text-left">Avtomatik o'tish va darhol natija</p>
                     </div>
                 </div>
 
-                <button onclick="startQuiz()" class="w-full py-5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl shadow-lg shadow-blue-200 transition-all transform hover:-translate-y-1 active:scale-95 text-xl">
-                    Testni boshlash
+                <button onclick="startQuiz()" class="group relative w-full py-6 bg-blue-600 hover:bg-blue-700 text-white font-black rounded-2xl shadow-2xl shadow-blue-200 transition-all transform hover:-translate-y-1 active:scale-95 text-xl overflow-hidden">
+                    <span class="relative z-10">TESTNI BOSHLASH</span>
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
                 </button>
             </div>
         </div>
 
         <!-- Quiz Screen -->
         <div id="quiz-screen" class="hidden">
-            <div class="custom-glass rounded-[2.5rem] shadow-2xl p-6 md:p-10 border border-white">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
-                    <div>
-                        <span id="progress-text" class="text-sm font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Savol: 1 / 10</span>
-                        <h4 class="text-slate-400 text-xs mt-3 font-semibold uppercase tracking-wider">Yo'nalish: Hayot sug'urtasi (Life)</h4>
+            <div class="custom-glass rounded-[3rem] shadow-[0_32px_64px_-15px_rgba(0,0,0,0.1)] p-8 md:p-12 border border-white">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="px-5 py-2 bg-blue-600 text-white rounded-2xl font-black text-sm tracking-tighter" id="progress-text">
+                            SAVOL: 1 / 10
+                        </div>
+                        <span class="h-1.5 w-1.5 rounded-full bg-slate-300"></span>
+                        <span class="text-slate-400 text-xs font-extrabold uppercase tracking-widest">Hayot sug'urtasi</span>
                     </div>
                     <div class="w-full md:w-64">
-                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
-                            <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-700" style="width: 10%"></div>
+                        <div class="h-3 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
+                            <div id="progress-bar" class="h-full bg-blue-600 rounded-full transition-all duration-500 progress-glow" style="width: 10%"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="min-h-[120px] mb-10">
-                    <h3 id="question-text" class="text-2xl md:text-3xl font-bold text-slate-800 leading-tight">
+                <div class="min-h-[140px] mb-12">
+                    <h3 id="question-text" class="text-2xl md:text-4xl font-extrabold text-slate-800 leading-[1.2] tracking-tight">
                         Yuklanmoqda...
                     </h3>
                 </div>
@@ -79,54 +133,59 @@
                 <div id="options-container" class="grid grid-cols-1 gap-4">
                     <!-- Options injected here -->
                 </div>
-
-                <div class="mt-12 pt-8 border-t border-slate-100 flex justify-end">
-                    <button id="next-btn" onclick="nextQuestion()" disabled class="bg-slate-200 text-slate-400 cursor-not-allowed font-bold py-4 px-12 rounded-2xl transition-all duration-300 text-lg">
-                        Keyingisi
-                    </button>
-                </div>
             </div>
         </div>
 
         <!-- Result Screen -->
         <div id="result-screen" class="hidden">
-            <div class="text-center custom-glass rounded-[2.5rem] shadow-2xl p-10 md:p-16 border border-white mb-8">
-                <h2 class="text-4xl font-black text-slate-800 mb-2 italic">Imtihon Yakunlandi</h2>
-                <div class="relative w-56 h-56 mx-auto my-10">
+            <div class="text-center custom-glass rounded-[3rem] shadow-[0_32px_64px_-15px_rgba(0,0,0,0.1)] p-12 md:p-20 border border-white mb-10">
+                <div id="result-icon-container" class="mb-8"></div>
+                <h2 class="text-5xl font-black text-slate-800 mb-4 tracking-tighter">Natijangiz</h2>
+                
+                <div class="relative w-64 h-64 mx-auto my-12">
                     <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                        <circle cx="18" cy="18" r="16" fill="none" class="text-slate-100" stroke-width="3" stroke="currentColor"></circle>
-                        <circle id="score-stroke" cx="18" cy="18" r="16" fill="none" class="text-blue-600" stroke-width="3" stroke-dasharray="0, 100" stroke-linecap="round" stroke="currentColor" style="transition: stroke-dasharray 1.5s ease-in-out"></circle>
+                        <circle cx="18" cy="18" r="16" fill="none" class="text-slate-100" stroke-width="2.5" stroke="currentColor"></circle>
+                        <circle id="score-stroke" cx="18" cy="18" r="16" fill="none" class="text-blue-600" stroke-width="2.5" stroke-dasharray="0, 100" stroke-linecap="round" stroke="currentColor" style="transition: stroke-dasharray 2s cubic-bezier(0.4, 0, 0.2, 1)"></circle>
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span id="final-score" class="text-6xl font-black text-slate-800">0/10</span>
-                        <span id="score-percent" class="text-sm font-bold text-slate-400 mt-2 tracking-widest">0% NATIJA</span>
+                        <span id="final-score" class="text-7xl font-black text-slate-800 tracking-tighter">0/10</span>
+                        <span id="score-percent" class="text-xs font-black text-blue-600 mt-2 tracking-[0.3em] uppercase">0% MUVAFFAQIYAT</span>
                     </div>
                 </div>
-                <div class="max-w-md mx-auto">
-                    <p id="result-message" class="text-xl text-slate-700 mb-10 font-medium italic"></p>
-                    <button onclick="resetQuiz()" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-5 px-10 rounded-2xl transition duration-300 shadow-2xl text-lg mb-4">
-                        Qayta imtihon topshirish
+
+                <p id="result-message" class="text-xl text-slate-600 mb-12 font-medium max-w-md mx-auto leading-relaxed"></p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="resetQuiz()" class="px-10 py-5 bg-slate-900 hover:bg-black text-white font-bold rounded-2xl transition-all shadow-xl hover:-translate-y-1">
+                        Qayta topshirish
                     </button>
-                    <a href="#detailed-report" class="text-blue-600 font-bold hover:underline block">Xatolar tahlilini ko'rish ↓</a>
+                    <button onclick="document.getElementById('detailed-report').scrollIntoView({behavior:'smooth'})" class="px-10 py-5 bg-white border-2 border-slate-200 text-slate-700 font-bold rounded-2xl hover:bg-slate-50 transition-all">
+                        Xatolar tahlili
+                    </button>
                 </div>
             </div>
 
             <!-- Detailed Report Section -->
-            <div id="detailed-report" class="bg-white rounded-[2rem] shadow-xl p-6 md:p-10 border border-slate-100 overflow-hidden">
-                <h3 class="text-2xl font-bold text-slate-800 mb-8 flex items-center">
-                    <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mr-3 text-base">📊</span>
+            <div id="detailed-report" class="bg-white rounded-[2.5rem] shadow-2xl p-8 md:p-12 border border-slate-100">
+                <h3 class="text-3xl font-black text-slate-800 mb-10 flex items-center tracking-tight">
+                    <span class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mr-4 shadow-inner">📋</span>
                     Savollar tahlili
                 </h3>
-                <div id="report-container" class="space-y-6">
+                <div id="report-container" class="space-y-8">
                     <!-- Report items injected here -->
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="py-10 text-center text-slate-400 text-sm mt-auto bg-white border-t border-slate-100">
-        <p class="font-bold text-slate-500 uppercase tracking-[0.3em] mb-2">HayotInsurance.uz</p>
-        <p>© 2026 Barcha huquqlar himoyalangan.</p>
+    <footer class="py-12 text-center text-slate-400 text-sm mt-auto">
+        <div class="flex justify-center space-x-2 mb-4">
+            <span class="w-8 h-1 bg-slate-200 rounded-full"></span>
+            <span class="w-8 h-1 bg-blue-600 rounded-full"></span>
+            <span class="w-8 h-1 bg-slate-200 rounded-full"></span>
+        </div>
+        <p class="font-black text-slate-600 uppercase tracking-[0.4em] mb-2 text-xs">HayotInsurance.uz</p>
+        <p>© 2026 Professional Sug'urta Platformasi</p>
     </footer>
 
     <script>
@@ -157,7 +216,7 @@
                 correct: 1
             },
             {
-                q: "Sug'urta agenti bir vaqtning o'zida nechta hayot sug'urtasi kompaniyasi bilan shartnoma tuzishi mumkin (eksklyuzivlik bo'lmasa)?",
+                q: "Sug'urta agenti bir vaqtning o'zida nechta hayot sug'urtasi kompaniyasi bilan shartnoma tuzishi mumkin?",
                 options: ["Cheklanmagan", "Faqat bitta", "Faqat uchtagacha", "Agentlar hayot sug'urtasida ishlay olmaydi"],
                 correct: 1
             },
@@ -168,16 +227,16 @@
             },
             {
                 q: "Sug'urta tarmog'idagi 'Aktuariy' kim?",
-                options: ["Sug'urta polisi sotuvchisi", "Matematik va statistik usullar bilan xavf hamda tariflarni hisoblovchi mutaxassis", "Kompaniya advokati", "Mijozlarni qabul qiluvchi xodim"],
+                options: ["Sug'urta polisi sotuvchisi", "Xavf hamda tariflarni hisoblovchi mutaxassis", "Kompaniya advokati", "Mijozlarni qabul qiluvchi xodim"],
                 correct: 1
             },
             {
                 q: "Hayot sug'urtasida 'Surrender Value' (Viykupnaya summa) nima?",
-                options: ["Agentning mukofot puli", "Shartnoma muddatidan oldin bekor qilinganda mijozga qaytariladigan to'plangan mablag' qismi", "Soliq jarimasi", "Kompaniya sof foydasi"],
+                options: ["Agentning mukofot puli", "Bekor qilinganda mijozga qaytariladigan to'plangan mablag' qismi", "Soliq jarimasi", "Kompaniya sof foydasi"],
                 correct: 1
             },
             {
-                q: "JShDS (Daromad solig'i) bo'yicha imtiyoz qo'llanilishi uchun hayot sug'urtasi shartnomasi qancha muddatga tuzilgan bo'lishi shart?",
+                q: "JShDS bo'yicha imtiyoz qo'llanilishi uchun hayot sug'urtasi shartnomasi qancha muddatga tuzilgan bo'lishi shart?",
                 options: ["Kamida 6 oy", "Kamida 12 oy", "Kamida 3 yil", "Muddat ahamiyatga ega emas"],
                 correct: 1
             }
@@ -186,14 +245,15 @@
         let currentQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
-        let selectedOption = null;
-        let userAnswers = []; // Foydalanuvchi javoblarini saqlash uchun
+        let userAnswers = [];
+        let canAnswer = true;
 
         function startQuiz() {
             currentQuestions = [...allQuestions].sort(() => 0.5 - Math.random());
             currentQuestionIndex = 0;
             score = 0;
             userAnswers = [];
+            canAnswer = true;
             
             document.getElementById('start-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.add('hidden');
@@ -204,9 +264,9 @@
 
         function showQuestion() {
             const question = currentQuestions[currentQuestionIndex];
-            selectedOption = null;
+            canAnswer = true;
             
-            document.getElementById('progress-text').innerText = `Savol: ${currentQuestionIndex + 1} / 10`;
+            document.getElementById('progress-text').innerText = `SAVOL: ${currentQuestionIndex + 1} / 10`;
             document.getElementById('progress-bar').style.width = `${(currentQuestionIndex + 1) * 10}%`;
             document.getElementById('question-text').innerText = question.q;
             
@@ -215,78 +275,83 @@
             
             question.options.forEach((opt, index) => {
                 const btn = document.createElement('button');
-                btn.className = "option-btn w-full text-left p-6 border-2 border-slate-100 rounded-2xl hover:border-blue-500 hover:bg-blue-50 flex items-center group relative";
+                btn.className = "option-btn w-full text-left p-6 border-2 border-slate-100 rounded-3xl flex items-center group relative bg-white";
                 btn.innerHTML = `
-                    <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center mr-6 group-hover:bg-blue-600 group-hover:text-white font-bold transition-all border border-slate-200">
+                    <div class="w-12 h-12 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center mr-6 font-black text-lg border border-slate-100 transition-colors group-hover:bg-blue-50 group-hover:text-blue-600">
                         ${String.fromCharCode(65 + index)}
                     </div>
-                    <span class="text-slate-700 font-bold text-lg flex-1">${opt}</span>
+                    <span class="text-slate-700 font-bold text-lg md:text-xl flex-1">${opt}</span>
+                    <div class="status-icon opacity-0 ml-4 transition-opacity"></div>
                 `;
-                btn.onclick = () => selectOption(index, btn);
+                btn.onclick = () => selectAndNext(index, btn);
                 optionsContainer.appendChild(btn);
             });
-            
-            const nextBtn = document.getElementById('next-btn');
-            nextBtn.disabled = true;
-            nextBtn.className = "bg-slate-200 text-slate-400 cursor-not-allowed font-bold py-4 px-12 rounded-2xl transition-all duration-300 text-lg";
         }
 
-        function selectOption(index, element) {
-            selectedOption = index;
-            
-            const buttons = document.getElementById('options-container').children;
-            for (let btn of buttons) {
-                btn.classList.remove('border-blue-600', 'bg-blue-50', 'ring-4', 'ring-blue-100');
-                btn.querySelector('div').classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
-                btn.querySelector('div').classList.add('bg-slate-100', 'text-slate-500');
-            }
-            
-            element.classList.add('border-blue-600', 'bg-blue-50', 'ring-4', 'ring-blue-100');
-            element.querySelector('div').classList.remove('bg-slate-100', 'text-slate-500');
-            element.querySelector('div').classList.add('bg-blue-600', 'text-white', 'border-blue-600');
-            
-            const nextBtn = document.getElementById('next-btn');
-            nextBtn.disabled = false;
-            nextBtn.className = "bg-blue-600 text-white hover:bg-blue-700 shadow-xl font-bold py-4 px-12 rounded-2xl transition-all duration-300 transform active:scale-95 text-lg";
-        }
+        function selectAndNext(index, element) {
+            if (!canAnswer) return;
+            canAnswer = false;
 
-        function nextQuestion() {
-            // Javobni saqlash
-            userAnswers.push(selectedOption);
+            const isCorrect = index === currentQuestions[currentQuestionIndex].correct;
+            userAnswers.push(index);
 
-            if (selectedOption === currentQuestions[currentQuestionIndex].correct) {
+            if (isCorrect) {
                 score++;
-            }
-            
-            currentQuestionIndex++;
-            
-            if (currentQuestionIndex < currentQuestions.length) {
-                showQuestion();
+                element.classList.add('correct-anim');
+                element.querySelector('.status-icon').innerHTML = '<span class="text-2xl text-green-600">✓</span>';
             } else {
-                showResult();
+                element.classList.add('wrong-anim');
+                element.querySelector('.status-icon').innerHTML = '<span class="text-2xl text-red-600">✕</span>';
+                
+                // To'g'ri javobni ham ko'rsatish
+                const buttons = document.getElementById('options-container').children;
+                const correctIdx = currentQuestions[currentQuestionIndex].correct;
+                buttons[correctIdx].classList.add('correct-anim');
             }
+            
+            element.querySelector('.status-icon').classList.remove('opacity-0');
+
+            // Avtomatik keyingi savolga o'tish (1 soniya kechikish bilan)
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < currentQuestions.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 1000);
         }
 
         function showResult() {
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
             
-            document.getElementById('final-score').innerText = `${score}/10`;
+            const finalScoreEl = document.getElementById('final-score');
             const percent = score * 10;
-            document.getElementById('score-percent').innerText = `${percent}% NATIJA`;
+            
+            finalScoreEl.innerText = `${score}/10`;
+            document.getElementById('score-percent').innerText = `${percent}% MUVAFFAQIYAT`;
             
             setTimeout(() => {
                 document.getElementById('score-stroke').setAttribute('stroke-dasharray', `${percent}, 100`);
-            }, 100);
+            }, 200);
             
             let message = "";
-            if (score === 10) message = "Fenomenal natija! Siz haqiqiy sug'urta ekspertsiz.";
-            else if (score >= 7) message = "Juda yaxshi natija! Bilimingiz professional faoliyat uchun yetarli.";
-            else message = "Bilimingizni oshirishingiz kerak. O'RQ-730 sonli qonunni qayta o'qib chiqish tavsiya etiladi.";
+            let icon = "";
+            if (score === 10) {
+                message = "Mukammal! Siz sohaning yetuk mutaxassisi ekanligingizni isbotladingiz.";
+                icon = "🏆";
+            } else if (score >= 7) {
+                message = "Ajoyib natija! Professional malakangiz yuqori darajada.";
+                icon = "🌟";
+            } else {
+                message = "Yomon emas, lekin bilimingizni yanada mustahkamlash uchun qonun hujjatlarini qayta ko'rib chiqing.";
+                icon = "📚";
+            }
             
             document.getElementById('result-message').innerText = message;
+            document.getElementById('result-icon-container').innerHTML = `<span class="text-7xl">${icon}</span>`;
 
-            // Batafsil hisobotni shakllantirish
             generateReport();
         }
 
@@ -299,25 +364,25 @@
                 const isCorrect = userChoice === question.correct;
 
                 const item = document.createElement('div');
-                item.className = `p-6 rounded-2xl border-l-8 ${isCorrect ? 'bg-green-50 border-green-500' : 'bg-red-50 border-red-500'} report-card`;
+                item.className = `p-8 rounded-[2rem] border-2 transition-all hover:shadow-lg ${isCorrect ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100'}`;
                 
                 item.innerHTML = `
-                    <div class="flex items-center mb-3">
-                        <span class="text-xs font-black px-2 py-1 rounded ${isCorrect ? 'bg-green-200 text-green-700' : 'bg-red-200 text-red-700'} uppercase mr-3">
-                            ${isCorrect ? 'Tog\'ri' : 'Xato'}
+                    <div class="flex flex-wrap items-center gap-4 mb-6">
+                        <span class="text-xs font-black px-4 py-1.5 rounded-full ${isCorrect ? 'bg-green-600 text-white' : 'bg-red-600 text-white'} uppercase">
+                            ${isCorrect ? 'To\'g\'ri' : 'Xato'}
                         </span>
-                        <span class="text-slate-400 font-bold text-sm">Savol #${index + 1}</span>
+                        <span class="text-slate-400 font-bold text-sm tracking-widest uppercase">Savol #${index + 1}</span>
                     </div>
-                    <p class="text-slate-800 font-bold mb-4">${question.q}</p>
-                    <div class="space-y-2">
-                        <div class="text-sm">
-                            <span class="text-slate-500">Sizning javobingiz:</span> 
-                            <span class="font-bold ${isCorrect ? 'text-green-600' : 'text-red-600'}">${question.options[userChoice]}</span>
+                    <p class="text-slate-800 font-extrabold text-xl mb-6 leading-tight">${question.q}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Sizning javobingiz</p>
+                            <p class="font-bold ${isCorrect ? 'text-green-600' : 'text-red-600'}">${question.options[userChoice]}</p>
                         </div>
                         ${!isCorrect ? `
-                        <div class="text-sm">
-                            <span class="text-slate-500">To'g'ri javob:</span> 
-                            <span class="font-bold text-green-600">${question.options[question.correct]}</span>
+                        <div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">To'g'ri javob</p>
+                            <p class="font-bold text-green-600">${question.options[question.correct]}</p>
                         </div>
                         ` : ''}
                     </div>
